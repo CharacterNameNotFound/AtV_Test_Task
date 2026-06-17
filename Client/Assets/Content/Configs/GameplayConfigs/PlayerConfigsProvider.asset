@@ -20,3 +20,5 @@ MonoBehaviour:
   <TurretRotationConstraint>k__BackingField: 120
   <MaxParticleIntensity>k__BackingField: 25
   <ParticleStartThreshold>k__BackingField: 0.5
+  <HorizontalMovementAmplitude>k__BackingField: 0.65
+  <HorizontalMovementPeriodMult>k__BackingField: 1.5

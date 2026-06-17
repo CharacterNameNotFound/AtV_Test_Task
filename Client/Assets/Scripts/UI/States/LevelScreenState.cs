@@ -1,18 +1,49 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
+using GameLoop;
+using GameLoop.Services;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace UI.States
 {
     public class LevelScreenState : BaseScreenState
     {
-        public override UniTask OnStateEnter(GameplayUIController controller, CancellationToken cancellationToken)
+        [SerializeField] private Slider _fillBar;
+        [SerializeField] private TMP_Text _distanceText;
+
+        private IGameProgressProvider _gameProgressProvider;
+        private IGameEndDecisionMaker _gameEndDecisionMaker;
+        private GameRegistry _gameRegistry;
+        
+        [Inject]
+        private void Construct(IGameProgressProvider gameProgressProvider, IGameEndDecisionMaker gameEndDecisionMaker)
         {
-            throw new System.NotImplementedException();
+            _gameProgressProvider = gameProgressProvider;
+            _gameEndDecisionMaker = gameEndDecisionMaker;
         }
 
-        public override UniTask OnStateExit(CancellationToken cancellationToken)
+        private void LateUpdate()
         {
-            throw new System.NotImplementedException();
+            _fillBar.value = _gameProgressProvider.GetProgress();
+            _distanceText.text = $"{(int)_gameProgressProvider.GetDistance()}m";
+
+            if (!_gameEndDecisionMaker.IsGameEnd(out bool isWin))
+            {
+                return;
+            }
+
+            if (isWin)
+            {
+                Controller.SwapState<LevelWonScreenState>(Application.exitCancellationToken).Forget();
+            }
+            else
+            {
+                Controller.SwapState<LevelLostScreenState>(Application.exitCancellationToken).Forget();
+            }
+            
         }
+        
     }
 }

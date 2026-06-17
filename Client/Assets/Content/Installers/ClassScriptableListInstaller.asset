@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Installers.ScriptableListInstaller
   _dataObject:
   - {fileID: 11400000, guid: 6f35695f8568ddc46bc2eb46e86daf6a, type: 2}
-  - {fileID: 11400000, guid: f88eb55641b8fdd4a9db33b5b0a7181e, type: 2}
   - {fileID: 11400000, guid: c13589168c284164e991142180fb4efc, type: 2}
+  - {fileID: 11400000, guid: f88eb55641b8fdd4a9db33b5b0a7181e, type: 2}
+  - {fileID: 11400000, guid: 10ecb6b8b043bf74cb0d4f029deb11ee, type: 2}
+  - {fileID: 11400000, guid: a1003da670d43e549957713a79665f08, type: 2}
+  _installParent: 1

@@ -15,18 +15,33 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: d544c29b2fb4e7840bd94d0928e29533
   m_SerializeEntries:
-  - m_GUID: 37af885c6bb5f024bbc89cf1af75fa8b
-    m_Address: Assets/Content/Prefabs/Car.prefab
+  - m_GUID: 1d64b974bd59fa946b89cdf438d0203b
+    m_Address: Assets/Content/Prefabs/Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 78fc0c9c1699d12488d55eee2ecf42de
-    m_Address: Assets/Content/Prefabs/Stickman.prefab
+  - m_GUID: 6bb0eb69dd8d21a448fae9c462ef3abb
+    m_Address: Assets/Content/Prefabs/Enemy/Enemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89a926426d37c084b8b931370a077a9a
+    m_Address: Assets/Content/Prefabs/Bullets/Bullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8e8a068f6d85c6647b972d12b6451c09
     m_Address: Assets/Content/Prefabs/Road.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92450c3bf695e2f408488d98058f23eb
+    m_Address: Assets/Content/VFX/FlyingText/FlyingText.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3246504d8905194b829df89ef3a04d3
+    m_Address: Assets/Content/Prefabs/Enemy/Elments/EnemyDeathParticle.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -8,6 +8,6 @@ public class CoreInstaller : ScriptableObjectInstaller<CoreInstaller>
     public override void InstallBindings()
     {
         Container.Install<ServiceInstaller>();
-        Container.Install<SystemsInstallerInstaller>();
+        Container.Install<SystemsInstaller>();
     }
 }

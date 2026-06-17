@@ -7,27 +7,37 @@ using Utils;
 
 namespace GameLoop.Systems.World
 {
-    // generally it is required to repivot world ceter from time to time due to float precision, but taking into account level size, we do not need it
+    // generally it is required to repivot "world center" from time to time due to float precision, but taking into account level size, we do not need it
     public class RoadUpdater : ILoopedSystem
     {
         private const int PoolSize = 5;
 
-        private GameObjectPoolAddressProvider<RoadComponent> _addressProvider;
-
-        private Transform _poolHolder;
-        private RoadComponent[] _roadSections;
-        private float _roadSectorLength;
+        private readonly GameObjectPoolAddressProvider<RoadComponent> _addressProvider;
+        private readonly GameRootTransformProvider _gameRootTransformProvider;
         
-        public RoadUpdater(GameObjectPoolAddressProvider<RoadComponent> addressProvider)
+        private readonly Transform _poolHolder;
+        private readonly RoadComponent[] _roadSections;
+        
+        private float _roadSectorLength;
+        private int _lastSectionIndex;
+        private int _playerCurrentSection;
+        
+        public RoadUpdater(
+            GameObjectPoolAddressProvider<RoadComponent> addressProvider, 
+            GameRootTransformProvider gameRootTransformProvider)
         {
             _addressProvider = addressProvider;
+            _gameRootTransformProvider = gameRootTransformProvider;
 
             _roadSections = new RoadComponent[PoolSize];
-            _poolHolder = new GameObject($"{nameof(RoadComponent)} pool").transform;
+            _poolHolder = new GameObject($"{nameof(RoadComponent)}").transform;
         }
 
-        public async UniTask Initialize(CancellationToken cancellationToken)
+        // generally this should be out of work scope of the system, but squashing all as requested
+        public async UniTask Initialize(GameRegistry gameRegistry, CancellationToken cancellationToken)
         {
+            _poolHolder.SetParent(_gameRootTransformProvider.GameRoot);
+            
             for (int i = 0; i < PoolSize; i++)
             {
                 _roadSections[i] = await _addressProvider.AssetReferenceGameObject.Instantiate<RoadComponent>(
@@ -36,26 +46,52 @@ namespace GameLoop.Systems.World
             }
             
             _roadSectorLength = _roadSections[0].Renderer.bounds.size.x;
-            PlaceRoads(0, Vector3.zero);
+            SetRoadsInitialPlacement(0);
+
+            _lastSectionIndex = 0;
+            _playerCurrentSection = 0;
         }
 
-        public UniTask Reset(CancellationToken cancellationToken)
+        public UniTask Reset(GameRegistry gameRegistry, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            SetRoadsInitialPlacement(0);
+            
+            _lastSectionIndex = 0;
+            _playerCurrentSection = 0;
+            
+            return UniTask.CompletedTask;
         }
 
         public UniTask Loop(float deltaTime, GameRegistry gameRegistry, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            int playerSection = Mathf.FloorToInt(gameRegistry.PlayerComponent.Transform.position.x / _roadSectorLength);
+            
+            if (_playerCurrentSection == playerSection)
+            {
+                return UniTask.CompletedTask;
+            }
+            
+            MoveLastSection((uint) playerSection);
+            _playerCurrentSection++;
+                
+            return UniTask.CompletedTask;
         }
 
-        private void PlaceRoads(uint startingIndex, Vector3 startingPosition)
+        private void SetRoadsInitialPlacement(uint startingIndex)
         {
-            for (int i = -1; i < PoolSize - 1; i++, startingIndex++)
+            for (int i = 0; i < PoolSize; i++, startingIndex++)
             {
-                // In case we have uniq sequence of roads, this way we will have almost no chance to breake it.
-                _roadSections[startingIndex % PoolSize].transform.position = new Vector3(startingPosition.x + _roadSectorLength * i, 0, 0);
+                // In case we have uniq sequence of roads, this way we will have almost no chance to break it.
+                _roadSections[startingIndex % PoolSize].transform.position = new Vector3(_roadSectorLength * i, 0, 0);
             }
+        }
+        
+        private void MoveLastSection(uint playerCurrentSection)
+        {
+            uint roadPlacementIndex = playerCurrentSection + PoolSize - 1;
+            _roadSections[_lastSectionIndex % PoolSize].transform.position = new Vector3(_roadSectorLength * roadPlacementIndex, 0, 0);
+
+            _lastSectionIndex++;
         }
         
     }

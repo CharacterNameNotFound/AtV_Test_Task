@@ -1,18 +1,41 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using GameLoop;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using Zenject;
 
 namespace UI.States
 {
     public class LevelStartScreenState : BaseScreenState
     {
-        public override UniTask OnStateEnter(GameplayUIController controller, CancellationToken cancellationToken)
+        private IGameRoot _gameRoot;
+        
+        private bool _isActivated;
+        
+        [Inject]
+        private void Construct(IGameRoot gameLooper)
         {
-            throw new System.NotImplementedException();
+            _gameRoot = gameLooper;
+        }
+        
+        public override UniTask OnStateEnter(MainUIController controller, CancellationToken cancellationToken)
+        {
+            _isActivated = false;
+            return base.OnStateEnter(controller, cancellationToken);
         }
 
-        public override UniTask OnStateExit(CancellationToken cancellationToken)
+        private void Update()
         {
-            throw new System.NotImplementedException();
+            if (_isActivated || !Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                return;
+            }
+
+            _isActivated = true;
+            
+            _gameRoot.Loop(Application.exitCancellationToken).Forget();
+            Controller.SwapState<LevelScreenState>(Application.exitCancellationToken).Forget();
         }
     }
 }

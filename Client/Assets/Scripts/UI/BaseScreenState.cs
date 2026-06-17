@@ -6,7 +6,20 @@ namespace UI
 {
     public abstract class BaseScreenState : MonoBehaviour
     {
-        public abstract UniTask OnStateEnter(GameplayUIController controller, CancellationToken cancellationToken);
-        public abstract UniTask OnStateExit(CancellationToken cancellationToken);
+        protected MainUIController Controller;
+        
+        public virtual UniTask OnStateEnter(MainUIController controller, CancellationToken cancellationToken)
+        {
+            Controller = controller;
+            gameObject.SetActive(true);
+            return UniTask.CompletedTask;
+        }
+        
+        public virtual UniTask OnStateExit(CancellationToken cancellationToken)
+        {
+            gameObject.SetActive(false);
+            return UniTask.CompletedTask;
+        }
+        
     }
 }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b83f1695c0c47e9bb5dbda7acce4a64, type: 3}
+  m_Name: EnemyConfigs
+  m_EditorClassIdentifier: Assembly-CSharp::GameLoop.Configs.EnemySpawningConfigsProvider
+  <BasicSpawningCountPerSection>k__BackingField: 2
+  <SpawningCountPerSectionLengthModifier>k__BackingField: 0.03
+  <SpawnStartOffset>k__BackingField: 20
+  <SpawnPeriod>k__BackingField: 20
+  <PreSpawnLength>k__BackingField: 140
+  <SpawnWidth>k__BackingField: 10
+  <Hp>k__BackingField: 20
+  <Speed>k__BackingField: 6
+  <Damage>k__BackingField: 5
+  <ReactionRadius>k__BackingField: 15
+  <EnemyDeathAssetReference>k__BackingField:
+    m_AssetGUID: b3246504d8905194b829df89ef3a04d3
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0

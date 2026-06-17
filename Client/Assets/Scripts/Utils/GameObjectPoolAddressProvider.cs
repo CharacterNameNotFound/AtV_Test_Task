@@ -9,5 +9,10 @@ namespace Utils
     {
         // just in case, preventing override
         [field: SerializeField] public AssetReferenceGameObject AssetReferenceGameObject { get; protected set; }
+
+        public void SetReference(AssetReferenceGameObject assetReferenceGameObject)
+        {
+            AssetReferenceGameObject = assetReferenceGameObject;
+        }
     }
 }

@@ -2,6 +2,6 @@ namespace GameLoop
 {
     public interface IGameEndDecisionMaker
     {
-        public bool IsGameEnd(GameRegistry registry, out bool isWin);
+        public bool IsGameEnd(out bool isWin);
     }
 }

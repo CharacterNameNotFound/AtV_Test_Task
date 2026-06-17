@@ -5,8 +5,8 @@ namespace GameLoop
 {
     public interface ILoopedSystem
     {
-        public UniTask Initialize(CancellationToken cancellationToken);
-        public UniTask Reset(CancellationToken cancellationToken);
+        public UniTask Initialize(GameRegistry gameRegistry, CancellationToken cancellationToken);
+        public UniTask Reset(GameRegistry gameRegistry, CancellationToken cancellationToken);
         public UniTask Loop(float deltaTime, GameRegistry gameRegistry, CancellationToken cancellationToken);
     }
 }

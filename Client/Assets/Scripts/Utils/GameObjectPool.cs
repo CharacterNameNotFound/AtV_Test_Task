@@ -18,7 +18,7 @@ namespace Utils
         {
             _addressProvider = addressProvider;
             
-            _poolHolder = new GameObject($"{nameof(T)} pool").transform;
+            _poolHolder = new GameObject($"{typeof(T).Name} pool").transform;
             _instances = new List<T>(0);
         }
 
@@ -47,6 +47,7 @@ namespace Utils
 
         public void Return(T instance)
         {
+            instance.transform.SetParent(_poolHolder);
             _instances.Add(instance);
         }
 

@@ -35,7 +35,7 @@ namespace GameLoop
         {
             for (int i = 0; i < _systems.Length; i++)
             {
-                await _systems[i].Initialize(cancellationToken);
+                await _systems[i].Initialize(_gameRegistry, cancellationToken);
             }
             
         }
@@ -44,7 +44,7 @@ namespace GameLoop
         {
             for (int i = 0; i < _systems.Length; i++)
             {
-                await _systems[i].Reset(cancellationToken);
+                await _systems[i].Reset(_gameRegistry, cancellationToken);
             }
             
         }
@@ -63,7 +63,7 @@ namespace GameLoop
                 
                 await UniTask.WaitForFixedUpdate();
             } while (!cancellationToken.IsCancellationRequested && 
-                     !_gameEndDecisionMaker.IsGameEnd(_gameRegistry, out isWin));
+                     !_gameEndDecisionMaker.IsGameEnd(out isWin));
             
             cancellationToken.ThrowIfCancellationRequested();
 

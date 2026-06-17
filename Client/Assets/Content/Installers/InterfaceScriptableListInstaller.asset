@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9ec83d9a4b4f21add1eb4f5f9cb371, type: 3}
   m_Name: InterfaceScriptableListInstaller
   m_EditorClassIdentifier: Assembly-CSharp::Installers.InterfaceScriptableListInstaller
-  _dataObject: []
+  _dataObject:
+  - {fileID: 11400000, guid: 0e29be7f5a8052e4ea8e098015c74e9d, type: 2}
+  - {fileID: 11400000, guid: 49af2c892499b284bb196e18106b35eb, type: 2}
+  - {fileID: 11400000, guid: ee184406a3f157a40b20f65d4b6505cc, type: 2}
+  - {fileID: 11400000, guid: 8762a0c3b8b3a9244a499f958745113a, type: 2}
+  - {fileID: 11400000, guid: a1003da670d43e549957713a79665f08, type: 2}

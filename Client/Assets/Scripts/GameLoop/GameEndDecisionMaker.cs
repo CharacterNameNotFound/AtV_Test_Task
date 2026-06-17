@@ -1,13 +1,30 @@
+using GameLoop.Services;
+
 namespace GameLoop
 {
     public class GameEndDecisionMaker : IGameEndDecisionMaker
     {
-        public bool IsGameEnd(GameRegistry registry, out bool isWin)
+        private readonly IGameProgressProvider _gameProgressProvider;
+        private readonly GameRegistry _gameRegistry;
+
+        public GameEndDecisionMaker(IGameProgressProvider gameProgressProvider, GameRegistry gameRegistry)
+        {
+            _gameProgressProvider = gameProgressProvider;
+            _gameRegistry = gameRegistry;
+        }
+
+        public bool IsGameEnd(out bool isWin)
         {
             isWin = false;
                 
-            if (registry.PlayerComponent.Hp <= 0)
+            if (_gameRegistry.PlayerComponent.Hp <= 0)
             {
+                return true;
+            }
+
+            if (_gameProgressProvider.GetProgress() >= 1)
+            {
+                isWin = true;
                 return true;
             }
             

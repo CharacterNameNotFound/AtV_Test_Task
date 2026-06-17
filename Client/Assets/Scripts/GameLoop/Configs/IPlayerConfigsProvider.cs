@@ -10,5 +10,7 @@ namespace GameLoop.Configs
         public float TurretRotationConstraint { get; }
         public int MaxParticleIntensity { get; }
         public float ParticleStartThreshold { get; }
+        public float HorizontalMovementAmplitude { get; }
+        public float HorizontalMovementPeriodMult { get; }
     }
 }

@@ -18,5 +18,7 @@ namespace GameLoop.Configs
         [field: Header("VisualConfigs")]
         [field: SerializeField] public int MaxParticleIntensity { get; private set; }
         [field: SerializeField] public float ParticleStartThreshold { get; private set; }
+        [field: SerializeField] public float HorizontalMovementAmplitude { get; private set; }
+        [field: SerializeField] public float HorizontalMovementPeriodMult { get; private set; }
     }
 }

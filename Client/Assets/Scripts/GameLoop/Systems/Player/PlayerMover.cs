@@ -52,6 +52,10 @@ namespace GameLoop.Systems.Player
         {
             float speed = _playerConfigsProvider.Speed; 
             Vector3 transformPosition = gameRegistry.PlayerComponent.transform.position + new Vector3(speed * deltaTime, 0, 0);
+
+            float angle = transformPosition.x * Mathf.Deg2Rad * _playerConfigsProvider.HorizontalMovementPeriodMult;
+            transformPosition.z = Mathf.Sin(angle) * _playerConfigsProvider.HorizontalMovementAmplitude;
+            
             gameRegistry.PlayerComponent.Rigidbody.MovePosition(transformPosition);
             
             return UniTask.CompletedTask;
